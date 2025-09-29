@@ -1,0 +1,24 @@
+{
+    "menu": {
+        "view": "表示",
+        "reload": "リロード",
+        "force_reload": "強制リロード",
+        "toggle_devtools": "開発者モードで開く",
+        "reset_zoom": "Actual Size",
+        "zoom_in": "ズームアップ",
+        "zoom_out": "ズームダウン",
+        "file": "ファイル",
+        "restore_data": "データの復元",
+        "backup_data": "データのバックアップ",
+        "window": "ウィンドウ",
+        "close": "閉じる"
+    },
+    "save_file_dialog_to_import": {
+        "title": "データの復元",
+        "button_label": "復元"
+    },
+    "open_file_dialog_to_export": {
+        "title": "データのバックアップ",
+        "button_label": "バックアップ"
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "menu": {
+        "view": "View",
+        "reload": "Reload",
+        "force_reload": "Force Reload",
+        "toggle_devtools": "Toggle DevTools",
+        "reset_zoom": "Actual Size",
+        "zoom_in": "Zoom In",
+        "zoom_out": "Zoom Out",
+        "file": "File",
+        "restore_data": "Restore Data",
+        "backup_data": "Backup Data",
+        "window": "Window",
+        "close": "Close"
+    },
+    "save_file_dialog_to_import": {
+        "title": "Restore Data",
+        "button_label": "Restore"
+    },
+    "open_file_dialog_to_export": {
+        "title": "Backup Data",
+        "button_label": "Backup"
+    }
+}
