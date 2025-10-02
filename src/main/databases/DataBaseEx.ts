@@ -30,10 +30,25 @@ export default class DataBaseEx{
 
     public createTables() : BetterSqlite3.Database{
         return this.#db!.exec(`
-            CREATE TABLE IF NOT EXISTS users (
+            CREATE TABLE IF NOT EXISTS states(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                email TEXT NOT NULL UNIQUE
+                state_txt TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS books(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book_title TEXT NOT NULL,
+                author TEXT DEFAULT '',
+                url TEXT DEFAULT '',
+                isbn TEXT DEFAULT '',
+                volume_edition TEXT DEFAULT '',
+                genres_txt TEXT DEFAULT '',
+                publisher TEXT DEFAULT '',
+                summary_memo TEXT DEFAULT '',
+                purchase_date TEXT DEFAULT '',
+                purchase_price TEXT DEFAULT '',
+                finish_date TEXT DEFAULT '',
+                is_owned INTEGER DEFAULT 1,
+                status_id INTEGER DEFAULT 0
             );
         `);
     }
