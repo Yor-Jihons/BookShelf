@@ -1,11 +1,16 @@
 ## 必要な項目
 
 * 本のタイトル
-* 著者名
+* 著者名 (`author`)
 * URL
 * ISBN
 * ジャンル
-* 概要
-* 感想等
-* 本棚にあるかどうか
-* 本の状態
+* メモ/概要 (`summary_memo`)
+* 本棚にあるかどうか (`is_owned`)
+* 本の状態 (`status_id`)
+* 購入日 (`purchase_date`)
+* 購入価格 (`purchase_price`)
+* 出版社 (`publisher`)
+* 読了日 (`finish_date`)
+* 巻数/版 (`volume_edition`)
+
