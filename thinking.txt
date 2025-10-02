@@ -14,3 +14,28 @@
 * 読了日 (`finish_date`)
 * 巻数/版 (`volume_edition`)
 
+## テーブル定義
+
+```sql
+CREATE TABLE IF NOT EXISTS books(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book_title TEXT NOT NULL,
+    author TEXT DEFAULT '',
+    url TEXT DEFAULT '',
+    isbn TEXT DEFAULT '',
+    volume_edition TEXT DEFAULT '',
+    genres_txt TEXT DEFAULT '',
+    publisher TEXT DEFAULT '',
+    summary_memo TEXT DEFAULT '',
+    purchase_date TEXT DEFAULT '',
+    purchase_price TEXT DEFAULT '',
+    finish_date TEXT DEFAULT '',
+    is_owned INTEGER DEFAULT 1,
+    status_id INTEGER DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS states(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    state_txt TEXT NOT NULL
+);
+```
