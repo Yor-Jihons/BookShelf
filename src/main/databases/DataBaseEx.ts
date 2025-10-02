@@ -30,11 +30,33 @@ export default class DataBaseEx{
 
     public createTables() : BetterSqlite3.Database{
         return this.#db!.exec(`
-            CREATE TABLE IF NOT EXISTS users (
+            CREATE TABLE IF NOT EXISTS states(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                email TEXT NOT NULL UNIQUE
+                state_txt TEXT NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS books(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book_title TEXT NOT NULL,
+                author TEXT DEFAULT '',
+                url TEXT DEFAULT '',
+                isbn TEXT DEFAULT '',
+                volume_edition TEXT DEFAULT '',
+                genres_txt TEXT DEFAULT '',
+                publisher TEXT DEFAULT '',
+                summary_memo TEXT DEFAULT '',
+                purchase_date TEXT DEFAULT '',
+                purchase_price TEXT DEFAULT '',
+                finish_date TEXT DEFAULT '',
+                is_owned INTEGER DEFAULT 1,
+                status_id INTEGER DEFAULT 0
+            );
+            INSERT OR IGNNORE states VALUES(1, '所有:積読');
+            INSERT OR IGNNORE states VALUES(2, '所有：読書中');
+            INSERT OR IGNNORE states VALUES(3, '所有：読了');
+            INSERT OR IGNNORE states VALUES(4, '売却/破棄済み');
+            INSERT OR IGNNORE states VALUES(5, '貸借：返却済み（読了）');
+            INSERT OR IGNNORE states VALUES(6, '貸借：返却済み（未了）');
+            INSERT OR IGNNORE states VALUES(7, '貸借：現在貸出中');
         `);
     }
 
