@@ -49,3 +49,10 @@ INSERT OR IGNNORE states VALUES(5, '貸借：返却済み（読了）');
 INSERT OR IGNNORE states VALUES(6, '貸借：返却済み（未了）');
 INSERT OR IGNNORE states VALUES(7, '貸借：現在貸出中');
 ```
+
+## データの持ち方(in the app)
+
+* MainPageコンポーネントのstateとして一覧を取得しておく
+* 編集ダイアログには`selectedBook`のようにして渡す
+* `selectedBookIndex`をstateとして持つ
+* IPC通信は`Book`インターフェースのプロパティをすべて渡す方で行う
