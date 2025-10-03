@@ -30,7 +30,7 @@ export default class DataBaseEx{
 
     public createTables() : BetterSqlite3.Database{
         return this.#db!.exec(`
-            CREATE TABLE IF NOT EXISTS states(
+            CREATE TABLE IF NOT EXISTS status(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 state_txt TEXT NOT NULL
             );
@@ -50,13 +50,13 @@ export default class DataBaseEx{
                 is_owned INTEGER DEFAULT 1,
                 status_id INTEGER DEFAULT 0
             );
-            INSERT OR IGNORE INTO states VALUES(1, '所有:積読');
-            INSERT OR IGNORE INTO states VALUES(2, '所有：読書中');
-            INSERT OR IGNORE INTO states VALUES(3, '所有：読了');
-            INSERT OR IGNORE INTO states VALUES(4, '売却/破棄済み');
-            INSERT OR IGNORE INTO states VALUES(5, '貸借：返却済み（読了）');
-            INSERT OR IGNORE INTO states VALUES(6, '貸借：返却済み（未了）');
-            INSERT OR IGNORE INTO states VALUES(7, '貸借：現在貸出中');
+            INSERT OR IGNORE INTO status VALUES(1, '所有:積読');
+            INSERT OR IGNORE INTO status VALUES(2, '所有：読書中');
+            INSERT OR IGNORE INTO status VALUES(3, '所有：読了');
+            INSERT OR IGNORE INTO status VALUES(4, '売却/破棄済み');
+            INSERT OR IGNORE INTO status VALUES(5, '貸借：返却済み（読了）');
+            INSERT OR IGNORE INTO status VALUES(6, '貸借：返却済み（未了）');
+            INSERT OR IGNORE INTO status VALUES(7, '貸借：現在貸出中');
         `);
     }
 
