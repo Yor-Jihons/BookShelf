@@ -58,12 +58,14 @@ function MainPage() {
               <th className={styles.isbn}>ISBN</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td className={styles.id}>2024</td>
-                <td className={styles.title}>プログラミングが好きになる本～はじめてのプログラミング～</td>
-                <td className={styles.author}></td>
-                <td className={styles.isbn}>978-3-16-148410-0</td>
-              </tr>
+              {books.map( (book,idx) => {
+                return <tr key={idx}>
+                  <td className={styles.id}>{book.id}</td>
+                  <td className={styles.title}>{book.book_title}</td>
+                  <td className={styles.author}>{book.author}</td>
+                  <td className={styles.isbn}>{book.isbn}</td>
+                </tr>
+              })}
             </tbody>
           </table>
         </div>
