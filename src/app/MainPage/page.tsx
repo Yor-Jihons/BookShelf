@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../../App.css';
 import CommonLayout from '../layout';
+import Status from '../../types/Status';
 
 const dummyUsers = [
   { id: 1, name: 'Alice', email: 'alice@example.com' },
@@ -20,6 +21,15 @@ function MainPage() {
   const [usersFromDB, setUsersFromDB] = useState<string[]>( [] );
   const { i18n } = useTranslation();
 
+  const [status, setStatus] = useState<Status[]>( [] );
+
+  const fetchStatus = async () => {
+    const ret = await window.interprocessCommunication.fetchStatus();
+    if( !ret.success ) return;
+
+    setStatus( ret.value );
+  }
+
   useEffect(() => {
     const fetchUsers = async () => {
       const tmp = await window.interprocessCommunication.getUsers();
@@ -31,6 +41,7 @@ function MainPage() {
     };
     fetchUsers();
     setUsers(dummyUsers);
+    fetchStatus();
   }, []);
 
   // セレクトボックスの変更イベントハンドラ
@@ -67,6 +78,12 @@ function MainPage() {
         <select>
           {usersFromDB.map( (users, idx) => {
             return <option key={idx}>{users}</option>
+          })}
+        </select>
+
+        <select>
+          {status.map( (s, idx) => {
+            return <option key={idx}>{s.state_txt}</option>
           })}
         </select>
         <div>{i18n.t('menu.zoom_in')}</div>

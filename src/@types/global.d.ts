@@ -1,3 +1,5 @@
+import Status from "../types/Status";
+
 export interface IInterprocessCommunication {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initI18nData: ( resources: any ) => void;
@@ -6,6 +8,7 @@ export interface IInterprocessCommunication {
   chrome: () => string;
   electron: () => string;
   showMessageBox: ( message: string, buttons: string[] ) => Promise<number>; // Returns index of the button which the user selected.
+  fetchStatus: () => Promise<{success: boolean, value: Status[], errMessage?: string }>;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getUsers: () => Promise<any[]>;

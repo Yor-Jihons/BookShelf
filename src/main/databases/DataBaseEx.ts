@@ -60,13 +60,12 @@ export default class DataBaseEx{
         `);
     }
 
-    public getUsers(){
+    public fetchStatus(){
         try{
-            const stmt = this.#db!.prepare( 'SELECT name FROM users' );
-            return stmt.all();
+            const stmt = this.#db!.prepare( 'SELECT * FROM status' );
+            return {success: true, value: stmt.all() };
         }catch( error: unknown ){
-            console.error('Failed to fetch users:', error);
-            return [];
+            return {success: false, value: [], errMessage: (error as Error).message};
         }
     }
 
