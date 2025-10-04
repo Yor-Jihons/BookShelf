@@ -14,7 +14,6 @@ th.id{
 
 td.id{
     width: 37.3px;
-    background-color: pink;
     border: 1px solid black;
 }
 
@@ -25,7 +24,6 @@ th.title{
 
 td.title{
     width: 55%;
-    background-color: pink;
     border: 1px solid black;
 }
 
@@ -36,7 +34,6 @@ th.author{
 
 td.author{
     width: 25%;
-    background-color: pink;
     border: 1px solid black;
 }
 
@@ -47,6 +44,5 @@ th.isbn{
 
 td.isbn{
     width: 150px;
-    background-color: pink;
     border: 1px solid black;
 }
