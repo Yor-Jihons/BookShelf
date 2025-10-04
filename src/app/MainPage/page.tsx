@@ -49,6 +49,7 @@ function MainPage() {
           })}
         </select>
         <div>{i18n.t('menu.zoom_in')}</div>
+
         <div className={styles.table1}>
           <table className={styles.table1}>
             <thead>
