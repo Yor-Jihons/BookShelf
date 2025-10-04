@@ -115,6 +115,10 @@ app.whenReady().then(() => {
     return db.fetchStatus();
   });
 
+  ipcMain.handle('fetch-books', () => {
+    return db.fetchBooks();
+  });
+
   ipcMain.handle('add-user', (event, { name, email }) => {
     return db.addUser( name, email );
   });

@@ -69,6 +69,15 @@ export default class DataBaseEx{
         }
     }
 
+    public fetchBooks(){
+        try{
+            const stmt = this.#db!.prepare( 'SELECT * FROM books' );
+            return {success: true, value: stmt.all() };
+        }catch( error: unknown ){
+            return {success: false, value: [], errMessage: (error as Error).message};
+        }
+    }
+
     public addUser( name: string, email: string ){
         try{
             const stmt = this.#db!.prepare('INSERT INTO users (name, email) VALUES (?, ?)');

@@ -9,6 +9,7 @@ contextBridge.exposeInMainWorld('interprocessCommunication', {
   electron: () => process.versions.electron,
   showMessageBox: ( message: string, buttons: string[] ) => ipcRenderer.invoke( 'show-messagebox', { message, buttons } ),
   fetchStatus: () => ipcRenderer.invoke( 'fetch-status' ),
+  fetchBooks: () => ipcRenderer.invoke( 'fetch-books' ),
 
   // IPC通信用のAPIを追加
   getUsers: () => ipcRenderer.invoke('get-users'),

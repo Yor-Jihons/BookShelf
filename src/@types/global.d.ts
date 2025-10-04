@@ -1,3 +1,4 @@
+import Book from "../types/Book";
 import Status from "../types/Status";
 
 export interface IInterprocessCommunication {
@@ -9,6 +10,7 @@ export interface IInterprocessCommunication {
   electron: () => string;
   showMessageBox: ( message: string, buttons: string[] ) => Promise<number>; // Returns index of the button which the user selected.
   fetchStatus: () => Promise<{success: boolean, value: Status[], errMessage?: string }>;
+  fetchBooks: () => Promise<{success: boolean, value: Book[], errMessage?: string }>;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getUsers: () => Promise<any[]>;
