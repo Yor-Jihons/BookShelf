@@ -1,0 +1,48 @@
+div.table1{
+    overflow: auto;
+}
+
+table.table1{
+    border-collapse: collapse;
+}
+
+th.id{
+    width: 37.3px;
+    background-color: yellow;
+    border: 1px solid black;
+}
+
+td.id{
+    width: 37.3px;
+    border: 1px solid black;
+}
+
+th.title{
+    background-color: yellow;
+    border: 1px solid black;
+}
+
+td.title{
+    width: 55%;
+    border: 1px solid black;
+}
+
+th.author{
+    background-color: yellow;
+    border: 1px solid black;
+}
+
+td.author{
+    width: 25%;
+    border: 1px solid black;
+}
+
+th.isbn{
+    background-color: yellow;
+    border: 1px solid black;
+}
+
+td.isbn{
+    width: 150px;
+    border: 1px solid black;
+}

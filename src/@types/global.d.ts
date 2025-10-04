@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Book from "../types/Book";
 import Status from "../types/Status";
 
 export interface IInterprocessCommunication {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initI18nData: ( resources: any ) => void;
   getSystemLocale: () => Promise<string>;
   node: () => string;
@@ -12,7 +12,6 @@ export interface IInterprocessCommunication {
   fetchStatus: () => Promise<{success: boolean, value: Status[], errMessage?: string }>;
   fetchBooks: () => Promise<{success: boolean, value: Book[], errMessage?: string }>;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getUsers: () => Promise<any[]>;
   addUser: (name: string, email: string) => Promise<{ success: boolean, changes?: number, error?: string }>;
 }
