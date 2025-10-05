@@ -52,7 +52,7 @@ function MainPage() {
 
   return (
     <CommonLayout>
-      <EditDialog isOpen={isEditOpen} onClose={editDialog_close} onSubmit={editDialog_submit} />
+      <EditDialog isOpen={isEditOpen} selectedBook={books[0]} onClose={editDialog_close} onSubmit={editDialog_submit} />
       <div>
         <select>
           {books.map( (book, idx) => {
