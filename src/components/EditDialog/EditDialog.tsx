@@ -23,7 +23,7 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
     const [purchasePrice, setPurchasePrice] = useState<string>( selectedBook?.purchase_price || ""  );
     const [finishDate, setFinishDate] = useState<string>( selectedBook?.finish_date || ""  );
     //const [statusId, setStatusId] = useState<number>( selectedBook?.status_id || 0  );
-    //const [isOwned, setIsOwned] = useState<boolean>( selectedBook?.is_owned || false  );
+    const [isOwned, setIsOwned] = useState<boolean>( selectedBook?.is_owned || true  );
 
     useEffect( () => {
         if( dialogRef.current ){
@@ -98,7 +98,7 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
                         </p>
                         <p>
                             <label htmlFor='is_owned' className={styles.label1}>本棚にあるかどうか:</label>
-                            {/* TODO:  */}
+                            <input type="checkbox" name="is_owned" value="is_owned" checked={isOwned} onChange={(e) => setIsOwned( e.currentTarget.checked )} />
                         </p>
                         <p>
                             <label htmlFor='status_id' className={styles.label1}>本の状態:</label>
