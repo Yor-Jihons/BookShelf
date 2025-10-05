@@ -36,7 +36,7 @@ function MainPage() {
   }
 
   const editDialog_submit = ( newBook: Book ) => {
-    console.log( newBook.id ); // TODO:
+    console.log( "newBook = ", newBook ); // TODO:
   }
 
   const link_click = ( event: React.MouseEvent<HTMLAnchorElement> ) => {
