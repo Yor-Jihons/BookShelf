@@ -1,0 +1,50 @@
+h3.dialog_header{
+    text-align: center;
+}
+
+form.additiondialog_form{
+    display: flex;
+    flex-direction: column;
+}
+
+div.content_area{
+    display: flex;
+    flex-direction: column;
+}
+
+.textbox1{
+    width: 355px;
+}
+
+.textbox2{
+    width: 355px;
+    height: 100px;
+    vertical-align: middle;
+}
+
+div.button_area{
+    display: flex;
+    flex-direction: row;
+}
+
+button.submit_button{
+    margin: 10px;
+    flex-grow: 1;
+}
+
+button.cancel_button{
+    margin: 10px;
+    flex-grow: 1;
+}
+
+.label1{
+    display: inline-block;
+    text-align: right;
+    width: 170px;
+}
+
+.label2{
+    display: inline-block;
+    text-align:right;
+    width: 170px;
+}

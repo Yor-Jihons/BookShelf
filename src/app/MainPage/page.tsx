@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 //import reactLogo from '../assets/react.svg';
 //import viteLogo from '/vite.svg';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,7 @@ import styles from "./mainpage.module.css";
 import CommonLayout from '../layout';
 import Status from '../../types/Status';
 import Book from '../../types/Book';
+import EditDialog from '../../components/EditDialog/EditDialog';
 
 function MainPage() {
 
@@ -14,6 +15,7 @@ function MainPage() {
 
   const [status, setStatus] = useState<Status[]>( [] );
   const [books, setBooks] = useState<Book[]>( [] );
+  const [isEditOpen, setIsEditOpen] = useState<boolean>( false );
 
   const fetchStatus = async () => {
     const ret = await window.interprocessCommunication.fetchStatus();
@@ -29,6 +31,20 @@ function MainPage() {
     setBooks( ret.value );
   }
 
+  const editDialog_close = () => {
+    setIsEditOpen( false );
+  }
+
+  const editDialog_submit = ( newBook: Book ) => {
+    console.log( newBook.id ); // TODO:
+  }
+
+  const link_click = ( event: React.MouseEvent<HTMLAnchorElement> ) => {
+    const v: string = event.currentTarget.dataset.id!;
+    setIsEditOpen( true );
+    console.log( v );
+  }
+
   useEffect(() => {
     fetchBooks();
     fetchStatus();
@@ -36,6 +52,7 @@ function MainPage() {
 
   return (
     <CommonLayout>
+      <EditDialog isOpen={isEditOpen} onClose={editDialog_close} onSubmit={editDialog_submit} />
       <div>
         <select>
           {books.map( (book, idx) => {
@@ -61,10 +78,20 @@ function MainPage() {
             <tbody>
               {books.map( (book,idx) => {
                 return <tr key={idx}>
-                  <td className={styles.id}>{book.id}</td>
-                  <td className={styles.title}>{book.book_title}</td>
-                  <td className={styles.author}>{book.author}</td>
-                  <td className={styles.isbn}>{book.isbn}</td>
+                  <td className={styles.id}>
+                    {book.id}
+                  </td>
+                  <td className={styles.title}>
+                    <a href="#" onClick={link_click} data-id={book.id}>
+                      {book.book_title}
+                    </a>
+                  </td>
+                  <td className={styles.author}>
+                    {book.author}
+                  </td>
+                  <td className={styles.isbn}>
+                    {book.isbn}
+                  </td>
                 </tr>
               })}
             </tbody>
