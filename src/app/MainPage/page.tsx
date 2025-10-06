@@ -72,6 +72,11 @@ function MainPage() {
     setBooks( books.filter((book) => (book.id !== id) ) );
   }
 
+  const additionButton_click = () => {
+    setSelectedBookId( null );
+    setIsEditOpen( true );
+  }
+
   useEffect(() => {
     fetchBooks();
     fetchStatus();
@@ -80,6 +85,7 @@ function MainPage() {
   return (
     <CommonLayout>
       <EditDialog isOpen={isEditOpen} onClose={editDialog_close} onSubmit={editDialog_submit} selectedBook={editingBook} />
+      <button onClick={additionButton_click}>書籍の追加</button>
       <div>
         <select>
           {books.map( (book, idx) => {
