@@ -77,6 +77,10 @@ function MainPage() {
     setIsEditOpen( true );
   }
 
+  const exportHtmlButton_click = () => {
+
+  }
+
   useEffect(() => {
     fetchBooks();
     fetchStatus();
@@ -85,7 +89,10 @@ function MainPage() {
   return (
     <CommonLayout>
       <EditDialog isOpen={isEditOpen} onClose={editDialog_close} onSubmit={editDialog_submit} selectedBook={editingBook} />
+
       <button onClick={additionButton_click}>書籍の追加</button>
+      <button onClick={exportHtmlButton_click}>HTMLとしてエクスポートする</button>
+
       <div>
         <select>
           {books.map( (book, idx) => {
