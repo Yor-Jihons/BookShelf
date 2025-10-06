@@ -62,9 +62,14 @@ function MainPage() {
   }
 
   const link_click = ( event: React.MouseEvent<HTMLAnchorElement> ) => {
-    const v = Number( event.currentTarget.dataset.id );
-    setSelectedBookId( v );
+    const id = Number( event.currentTarget.dataset.id );
+    setSelectedBookId( id );
     setIsEditOpen( true );
+  }
+
+  const deleteButton_click = ( event: React.MouseEvent<HTMLButtonElement> ) => {
+    const id = Number( event.currentTarget.dataset.id );
+    setBooks( books.filter((book) => (book.id !== id) ) );
   }
 
   useEffect(() => {
@@ -95,7 +100,9 @@ function MainPage() {
               <tr><th className={styles.id}>ID</th>
               <th className={styles.title}>タイトル</th>
               <th className={styles.author}>著者</th>
-              <th className={styles.isbn}>ISBN</th></tr>
+              <th className={styles.isbn}>ISBN</th>
+              <th className={styles.deletebutton_area}>&nbsp;</th>
+              </tr>
             </thead>
             <tbody>
               {books.map( (book,idx) => {
@@ -113,6 +120,9 @@ function MainPage() {
                   </td>
                   <td className={styles.isbn}>
                     {book.isbn}
+                  </td>
+                  <td className={styles.deletebutton_area}>
+                    <button className={styles.deletebutton} data-id={book.id} onClick={deleteButton_click}>削除</button>
                   </td>
                 </tr>
               })}
