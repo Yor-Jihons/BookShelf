@@ -1,5 +1,6 @@
 div.table1{
     overflow: auto;
+    width: 100%;
 }
 
 table.table1{
@@ -44,5 +45,15 @@ th.isbn{
 
 td.isbn{
     width: 150px;
+    border: 1px solid black;
+}
+
+th.deletebutton_area{
+    background-color: yellow;
+    border: 1px solid black;
+}
+
+td.deletebutton_area{
+    width: 80px;
     border: 1px solid black;
 }

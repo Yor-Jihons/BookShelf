@@ -1,7 +1,7 @@
 import Book from "./Book";
 
 export const initialBook: Book = {
-    id: -1, // 仮のID。実際にはDBに登録時に採番される
+    id: -1,
     book_title: '',
     author: '',
     isbn: '',
