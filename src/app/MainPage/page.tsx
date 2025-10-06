@@ -8,14 +8,17 @@ import CommonLayout from '../layout';
 import Status from '../../types/Status';
 import Book from '../../types/Book';
 import EditDialog from '../../components/EditDialog/EditDialog';
+import { initialBook } from '../../types/inintialBook';
 
 function MainPage() {
-
   const { i18n } = useTranslation();
 
   const [status, setStatus] = useState<Status[]>( [] );
   const [books, setBooks] = useState<Book[]>( [] );
+  const [selectedBookId, setSelectedBookId] = useState<number>( 0 );
   const [isEditOpen, setIsEditOpen] = useState<boolean>( false );
+
+  const editingBook: Book = (selectedBookId !== null && books.find(book => book.id === selectedBookId)) || { ...initialBook }; 
 
   const fetchStatus = async () => {
     const ret = await window.interprocessCommunication.fetchStatus();
@@ -37,12 +40,13 @@ function MainPage() {
 
   const editDialog_submit = ( newBook: Book ) => {
     console.log( "newBook = ", newBook ); // TODO:
+    setIsEditOpen( false );
   }
 
   const link_click = ( event: React.MouseEvent<HTMLAnchorElement> ) => {
-    const v: string = event.currentTarget.dataset.id!;
+    const v = Number( event.currentTarget.dataset.id );
+    setSelectedBookId( v );
     setIsEditOpen( true );
-    console.log( v );
   }
 
   useEffect(() => {
@@ -52,7 +56,7 @@ function MainPage() {
 
   return (
     <CommonLayout>
-      <EditDialog isOpen={isEditOpen} onClose={editDialog_close} onSubmit={editDialog_submit} selectedBook={books[0]} />
+      <EditDialog isOpen={isEditOpen} onClose={editDialog_close} onSubmit={editDialog_submit} selectedBook={editingBook} />
       <div>
         <select>
           {books.map( (book, idx) => {
