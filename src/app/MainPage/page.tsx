@@ -15,7 +15,7 @@ function MainPage() {
 
   const [status, setStatus] = useState<Status[]>( [] );
   const [books, setBooks] = useState<Book[]>( [] );
-  const [selectedBookId, setSelectedBookId] = useState<number>( 0 );
+  const [selectedBookId, setSelectedBookId] = useState<number|null>( 0 );
   const [isEditOpen, setIsEditOpen] = useState<boolean>( false );
 
   const editingBook: Book = (selectedBookId !== null && books.find(book => book.id === selectedBookId)) || { ...initialBook }; 
@@ -38,8 +38,26 @@ function MainPage() {
     setIsEditOpen( false );
   }
 
+  const generateNewId = () => {
+    return 10; // TODO: 実際はDBから取得
+  }
+
   const editDialog_submit = ( newBook: Book ) => {
-    console.log( "newBook = ", newBook ); // TODO:
+    if( selectedBookId === null ){
+        const bookWithId = { ...newBook, id: generateNewId() };
+
+        setBooks( prevBooks => [...prevBooks, bookWithId] );
+    }else{
+        // TODO: IPCでメインプロセスに更新を依頼 (UPDATE books SET ... WHERE id = selectedBookId)
+
+        setBooks(prevBooks => 
+            prevBooks.map(book => 
+                book.id === selectedBookId ? newBook : book
+            )
+        );
+    }
+
+    setSelectedBookId( null );
     setIsEditOpen( false );
   }
 
