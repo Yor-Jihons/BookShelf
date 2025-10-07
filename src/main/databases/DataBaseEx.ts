@@ -100,7 +100,6 @@ export default class DataBaseEx{
             ) as any;
             return { success: true, value: { ...newBook, id: insertedRow[ "id" ] } };
         }catch( error: unknown ){
-            console.log("ERROR!, ", (error as Error).message);
             return { success: false, value: null, errMessage: (error as Error).message };
         }
     }

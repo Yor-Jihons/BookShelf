@@ -10,7 +10,6 @@ interface Props {
 }
 
 const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
-    console.log( "selectedBook = ", selectedBook );
     const dialogRef = useRef<HTMLDialogElement>( null );
     const [bookTitle, setBookTile] = useState<string>( "" );
     const [author, setAuthor] = useState<string>( "" );

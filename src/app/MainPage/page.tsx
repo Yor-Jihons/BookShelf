@@ -40,10 +40,8 @@ function MainPage() {
 
   const editDialog_submit = async ( newBook: Book ) => {
     if( selectedBookId === null ){
-        console.log("ret = ", newBook );
         const ret = await window.interprocessCommunication.insertBook( newBook );
         if( !ret.success ){
-          console.log( ret.errMessage );
           return;
         }
 
