@@ -103,6 +103,16 @@ export default class DataBaseEx{
         }
     }
 
+    public deleteBook( bookId: number ){
+        try{
+            const stmt = this.#db!.prepare( "DELETE FROM books WHERE id = ?" );
+            const info = stmt.run( bookId ) as any;
+            return { success: true, changes: info.changes };
+        }catch( error: unknown ){
+            return { success: false, errMessage: (error as Error).message };
+        }
+    }
+
     public insertBook( newBook: Book ){
         const sql: string = `
             INSERT INTO books(

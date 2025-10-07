@@ -65,8 +65,9 @@ function MainPage() {
     setIsEditOpen( true );
   }
 
-  const deleteButton_click = ( event: React.MouseEvent<HTMLButtonElement> ) => {
+  const deleteButton_click = async ( event: React.MouseEvent<HTMLButtonElement> ) => {
     const id = Number( event.currentTarget.dataset.id );
+    await window.interprocessCommunication.deleteBook( id );
     setBooks( books.filter((book) => (book.id !== id) ) );
   }
 
