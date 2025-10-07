@@ -80,6 +80,29 @@ export default class DataBaseEx{
         }
     }
 
+    public updateBook( bookId: number, newBook: Book ){
+        try{
+            const sql = `
+                UPDATE books SET book_title = ?, author = ?, url = ?, isbn = ?,
+                    volume_edition = ?, genres_txt = ?, publisher = ?, summary_memo = ?,
+                    purchase_date = ?, purchase_price = ?, finish_date = ?, is_owned = ?,
+                    status_id = ?
+                WHERE id = ?
+            `;
+            const stmt = this.#db!.prepare( sql );
+            const info = stmt.run(
+                newBook.book_title, newBook.author, newBook.url, newBook.isbn,
+                newBook.volume_edition, newBook.genres_txt, newBook.publisher, newBook.summary_memo,
+                newBook.purchase_date, newBook.purchase_price, newBook.finish_date, newBook.is_owned ? 1 : 0,
+                newBook.status_id,
+                bookId + 1 // TODO:
+            ) as any;
+            return { success: true, changes: info.changes };
+        }catch( error: unknown ){
+            return { success: false, errMessage: (error as Error).message };
+        }
+    }
+
     public insertBook( newBook: Book ){
         const sql: string = `
             INSERT INTO books(

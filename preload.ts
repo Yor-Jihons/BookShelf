@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld('interprocessCommunication', {
   fetchStatus: () => ipcRenderer.invoke( 'fetch-status' ),
   fetchBooks: () => ipcRenderer.invoke( 'fetch-books' ),
   insertBook: ( newBook: Book ) => ipcRenderer.invoke( 'insert-book', { newBook } ),
+  updateBook: ( bookId: number, newBook: Book ) => ipcRenderer.invoke('update-book', { bookId, newBook}),
 
   // IPC通信用のAPIを追加
   getUsers: () => ipcRenderer.invoke('get-users'),

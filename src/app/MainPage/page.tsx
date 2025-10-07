@@ -47,8 +47,7 @@ function MainPage() {
 
         setBooks( prevBooks => [ ...prevBooks, ret.value ] );
     }else{
-        // TODO: IPCでメインプロセスに更新を依頼 (UPDATE books SET ... WHERE id = selectedBookId)
-
+        await window.interprocessCommunication.updateBook( 1, newBook ); // TODO: Modify the ID.
         setBooks(prevBooks => 
             prevBooks.map(book => 
                 book.id === selectedBookId ? newBook : book

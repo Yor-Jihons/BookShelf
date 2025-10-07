@@ -115,6 +115,10 @@ app.whenReady().then(() => {
     return db.fetchStatus();
   });
 
+  ipcMain.handle('update-book', (event, {bookId, newBook}) => {
+    return db.updateBook( bookId, newBook );
+  });
+
   ipcMain.handle('fetch-books', () => {
     return db.fetchBooks();
   });
