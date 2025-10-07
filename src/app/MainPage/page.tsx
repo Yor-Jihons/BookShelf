@@ -38,15 +38,16 @@ function MainPage() {
     setIsEditOpen( false );
   }
 
-  const generateNewId = () => {
-    return 10; // TODO: 実際はDBから取得
-  }
-
-  const editDialog_submit = ( newBook: Book ) => {
+  const editDialog_submit = async ( newBook: Book ) => {
     if( selectedBookId === null ){
-        const bookWithId = { ...newBook, id: generateNewId() };
+        console.log("ret = ", newBook );
+        const ret = await window.interprocessCommunication.insertBook( newBook );
+        if( !ret.success ){
+          console.log( ret.errMessage );
+          return;
+        }
 
-        setBooks( prevBooks => [...prevBooks, bookWithId] );
+        setBooks( prevBooks => [ ...prevBooks, ret.value ] );
     }else{
         // TODO: IPCでメインプロセスに更新を依頼 (UPDATE books SET ... WHERE id = selectedBookId)
 

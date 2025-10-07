@@ -8,7 +8,7 @@ export const initialBook: Book = {
     publisher: '',
     url: '',
     volume_edition: '',
-    genre_txt: '',
+    genres_txt: '',
     summary_memo: '',
     purchase_date: '',
     purchase_price: '',

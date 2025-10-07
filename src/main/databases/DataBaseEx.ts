@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BetterSqlite3 from 'better-sqlite3';
+import Book from '../../types/Book.js';
 
 export default class DataBaseEx{
     #db: BetterSqlite3.Database|undefined;
@@ -78,6 +80,31 @@ export default class DataBaseEx{
         }
     }
 
+    public insertBook( newBook: Book ){
+        const sql: string = `
+            INSERT INTO books(
+                    book_title, author, url, isbn,
+                    volume_edition, genres_txt, publisher, summary_memo,
+                    purchase_date, purchase_price, finish_date, is_owned,
+                    status_id
+                ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                RETURNING id
+        `;
+        const stmt = this.#db!.prepare( sql );
+        try{
+            const insertedRow = stmt.run(
+                newBook.book_title, newBook.author, newBook.url, newBook.isbn,
+                newBook.volume_edition, newBook.genres_txt, newBook.publisher, newBook.summary_memo,
+                newBook.purchase_date, newBook.purchase_price, newBook.finish_date, newBook.is_owned ? 1 : 0,
+                newBook.status_id
+            ) as any;
+            return { success: true, value: { ...newBook, id: insertedRow[ "id" ] } };
+        }catch( error: unknown ){
+            console.log("ERROR!, ", (error as Error).message);
+            return { success: false, value: null, errMessage: (error as Error).message };
+        }
+    }
+
     public addUser( name: string, email: string ){
         try{
             const stmt = this.#db!.prepare('INSERT INTO users (name, email) VALUES (?, ?)');
@@ -92,7 +119,6 @@ export default class DataBaseEx{
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public addUsersWithTransaction( users: any){
         try {
             // トランザクションを使う場合はこのメソッドに渡す

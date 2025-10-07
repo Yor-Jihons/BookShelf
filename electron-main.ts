@@ -119,6 +119,10 @@ app.whenReady().then(() => {
     return db.fetchBooks();
   });
 
+  ipcMain.handle('insert-book', (event, {newBook}) => {
+    return db.insertBook( newBook );
+  });
+
   ipcMain.handle('add-user', (event, { name, email }) => {
     return db.addUser( name, email );
   });

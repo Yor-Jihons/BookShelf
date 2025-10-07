@@ -5,7 +5,7 @@ export default interface Book{
     url: string;
     isbn: string;
     volume_edition: string;
-    genre_txt: string;
+    genres_txt: string;
     publisher: string;
     summary_memo: string;
     purchase_date: string;
