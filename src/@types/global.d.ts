@@ -11,6 +11,7 @@ export interface IInterprocessCommunication {
   showMessageBox: ( message: string, buttons: string[] ) => Promise<number>; // Returns index of the button which the user selected.
   fetchStatus: () => Promise<{success: boolean, value: Status[], errMessage?: string }>;
   fetchBooks: () => Promise<{success: boolean, value: Book[], errMessage?: string }>;
+  insertBook: ( newBook: Book ) => Promise<{success: boolean, value: Book, errMessage?: string}>;
 
   getUsers: () => Promise<any[]>;
   addUser: (name: string, email: string) => Promise<{ success: boolean, changes?: number, error?: string }>;
