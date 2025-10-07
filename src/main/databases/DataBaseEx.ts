@@ -80,6 +80,39 @@ export default class DataBaseEx{
         }
     }
 
+    public updateBook( bookId: number, newBook: Book ){
+        try{
+            const sql = `
+                UPDATE books SET book_title = ?, author = ?, url = ?, isbn = ?,
+                    volume_edition = ?, genres_txt = ?, publisher = ?, summary_memo = ?,
+                    purchase_date = ?, purchase_price = ?, finish_date = ?, is_owned = ?,
+                    status_id = ?
+                WHERE id = ?
+            `;
+            const stmt = this.#db!.prepare( sql );
+            const info = stmt.run(
+                newBook.book_title, newBook.author, newBook.url, newBook.isbn,
+                newBook.volume_edition, newBook.genres_txt, newBook.publisher, newBook.summary_memo,
+                newBook.purchase_date, newBook.purchase_price, newBook.finish_date, newBook.is_owned ? 1 : 0,
+                newBook.status_id,
+                bookId + 1 // TODO:
+            ) as any;
+            return { success: true, changes: info.changes };
+        }catch( error: unknown ){
+            return { success: false, errMessage: (error as Error).message };
+        }
+    }
+
+    public deleteBook( bookId: number ){
+        try{
+            const stmt = this.#db!.prepare( "DELETE FROM books WHERE id = ?" );
+            const info = stmt.run( bookId ) as any;
+            return { success: true, changes: info.changes };
+        }catch( error: unknown ){
+            return { success: false, errMessage: (error as Error).message };
+        }
+    }
+
     public insertBook( newBook: Book ){
         const sql: string = `
             INSERT INTO books(
@@ -100,7 +133,6 @@ export default class DataBaseEx{
             ) as any;
             return { success: true, value: { ...newBook, id: insertedRow[ "id" ] } };
         }catch( error: unknown ){
-            console.log("ERROR!, ", (error as Error).message);
             return { success: false, value: null, errMessage: (error as Error).message };
         }
     }

@@ -115,6 +115,14 @@ app.whenReady().then(() => {
     return db.fetchStatus();
   });
 
+  ipcMain.handle('update-book', (event, {bookId, newBook}) => {
+    return db.updateBook( bookId, newBook );
+  });
+
+  ipcMain.handle('delete-book', (event, {bookId}) => {
+    return db.deleteBook( bookId );
+  });
+
   ipcMain.handle('fetch-books', () => {
     return db.fetchBooks();
   });

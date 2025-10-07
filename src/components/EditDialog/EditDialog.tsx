@@ -10,7 +10,6 @@ interface Props {
 }
 
 const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
-    console.log( "selectedBook = ", selectedBook );
     const dialogRef = useRef<HTMLDialogElement>( null );
     const [bookTitle, setBookTile] = useState<string>( "" );
     const [author, setAuthor] = useState<string>( "" );
@@ -24,7 +23,7 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
     const [purchasePrice, setPurchasePrice] = useState<string>( "" );
     const [finishDate, setFinishDate] = useState<string>( "" );
     const [statusId, setStatusId] = useState<number>( selectedBook?.status_id || 0  );
-    const [isOwned, setIsOwned] = useState<boolean>( selectedBook?.is_owned || true  );
+    const [isOwned, setIsOwned] = useState<boolean>( false );
 
     useEffect( () => {
         if( dialogRef.current ){
@@ -39,7 +38,7 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
             setUrl( isOpen ? selectedBook?.url : "" );
             setISBN( isOpen ? selectedBook?.isbn : "" );
             setVolumeEdition( isOpen ? selectedBook?.volume_edition : "" );
-            setGenres( isOpen ? selectedBook?.genre_txt : "" );
+            setGenres( isOpen ? selectedBook?.genres_txt : "" );
             setPublisher( isOpen ? selectedBook?.publisher : "" );
             setMemo( isOpen ? selectedBook?.summary_memo : "" );
             setPurchaseDate( isOpen ? selectedBook?.purchase_date : "" );
@@ -68,7 +67,7 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
         const tmp = {
             id: -1, book_title: t, author: a,
             url: u, isbn: i, volume_edition: v,
-            genre_txt: g, publisher: p, summary_memo: m,
+            genres_txt: g, publisher: p, summary_memo: m,
             purchase_date: pd, purchase_price: pp, finish_date: fd,
             status_id: si,
             is_owned: io

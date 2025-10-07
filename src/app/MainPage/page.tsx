@@ -40,17 +40,14 @@ function MainPage() {
 
   const editDialog_submit = async ( newBook: Book ) => {
     if( selectedBookId === null ){
-        console.log("ret = ", newBook );
         const ret = await window.interprocessCommunication.insertBook( newBook );
         if( !ret.success ){
-          console.log( ret.errMessage );
           return;
         }
 
         setBooks( prevBooks => [ ...prevBooks, ret.value ] );
     }else{
-        // TODO: IPCでメインプロセスに更新を依頼 (UPDATE books SET ... WHERE id = selectedBookId)
-
+        await window.interprocessCommunication.updateBook( 1, newBook ); // TODO: Modify the ID.
         setBooks(prevBooks => 
             prevBooks.map(book => 
                 book.id === selectedBookId ? newBook : book
@@ -68,8 +65,9 @@ function MainPage() {
     setIsEditOpen( true );
   }
 
-  const deleteButton_click = ( event: React.MouseEvent<HTMLButtonElement> ) => {
+  const deleteButton_click = async ( event: React.MouseEvent<HTMLButtonElement> ) => {
     const id = Number( event.currentTarget.dataset.id );
+    await window.interprocessCommunication.deleteBook( id );
     setBooks( books.filter((book) => (book.id !== id) ) );
   }
 
