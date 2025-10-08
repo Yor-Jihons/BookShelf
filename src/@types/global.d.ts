@@ -14,6 +14,7 @@ export interface IInterprocessCommunication {
   insertBook: ( newBook: Book ) => Promise<{success: boolean, value: Book, errMessage?: string}>;
   updateBook: ( bookId: number, newBook: Book ) => Promise<{success: boolean, changes?: any, errMessage?: string}>;
   deleteBook: ( bookId: number ) => Promise<{success: boolean, changes?: any, errMessage?: string}>;
+  exportHtml: () => Promise<{success: boolean, errMessage?: string}>;
 
   getUsers: () => Promise<any[]>;
   addUser: (name: string, email: string) => Promise<{ success: boolean, changes?: number, error?: string }>;

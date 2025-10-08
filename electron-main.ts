@@ -8,6 +8,11 @@ import path from 'path';
 import Files from "./src/main/files/Files.js";
 import { fileURLToPath } from 'url';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function exportHtml( db: DataBaseEx ){
+  console.log("called the function exportHtml.");
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let i18nData: any = {};
 
@@ -109,6 +114,11 @@ app.whenReady().then(() => {
   ipcMain.handle('show-messagebox', async (event, { message, buttons }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (await dialog.showMessageBox( mainWindow, { message: message, buttons: buttons } ) as any).response;
+  });
+
+  // TODO:
+  ipcMain.handle('export-html', () => {
+    exportHtml( db );
   });
 
   ipcMain.handle('fetch-status', () => {

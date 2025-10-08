@@ -76,8 +76,8 @@ function MainPage() {
     setIsEditOpen( true );
   }
 
-  const exportHtmlButton_click = () => {
-
+  const exportHtmlButton_click = async () => {
+    await window.interprocessCommunication.exportHtml();
   }
 
   useEffect(() => {
