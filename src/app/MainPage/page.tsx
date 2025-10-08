@@ -76,8 +76,13 @@ function MainPage() {
     setIsEditOpen( true );
   }
 
-  const exportHtmlButton_click = () => {
-
+  const exportHtmlButton_click = async () => {
+    const ret = await window.interprocessCommunication.exportHtml();
+    if( !ret.success ){
+      console.log( ret.errMessage );
+      return;
+    }
+    console.log("エクスポートしました。");
   }
 
   useEffect(() => {
