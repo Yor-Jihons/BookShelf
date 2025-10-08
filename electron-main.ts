@@ -111,6 +111,11 @@ app.whenReady().then(() => {
     return (await dialog.showMessageBox( mainWindow, { message: message, buttons: buttons } ) as any).response;
   });
 
+  // TODO:
+  ipcMain.handle('export-html', () => {
+    return {success: true};
+  });
+
   ipcMain.handle('fetch-status', () => {
     return db.fetchStatus();
   });
