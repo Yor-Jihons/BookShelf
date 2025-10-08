@@ -77,12 +77,7 @@ function MainPage() {
   }
 
   const exportHtmlButton_click = async () => {
-    const ret = await window.interprocessCommunication.exportHtml();
-    if( !ret.success ){
-      console.log( ret.errMessage );
-      return;
-    }
-    console.log("エクスポートしました。");
+    await window.interprocessCommunication.exportHtml();
   }
 
   useEffect(() => {
