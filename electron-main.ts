@@ -113,8 +113,7 @@ app.whenReady().then(() => {
 
   // TODO:
   ipcMain.handle('export-html', () => {
-    console.log("The export-html!");
-    return {success: true};
+    
   });
 
   ipcMain.handle('fetch-status', () => {
