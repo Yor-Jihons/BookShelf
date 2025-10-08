@@ -32,20 +32,22 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
             }else{
                 dialogRef.current.close();
             }
+        }
 
-            setBookTile( isOpen ? selectedBook?.book_title : "" );
-            setAuthor( isOpen ? selectedBook?.author : "" );
-            setUrl( isOpen ? selectedBook?.url : "" );
-            setISBN( isOpen ? selectedBook?.isbn : "" );
-            setVolumeEdition( isOpen ? selectedBook?.volume_edition : "" );
-            setGenres( isOpen ? selectedBook?.genres_txt : "" );
-            setPublisher( isOpen ? selectedBook?.publisher : "" );
-            setMemo( isOpen ? selectedBook?.summary_memo : "" );
-            setPurchaseDate( isOpen ? selectedBook?.purchase_date : "" );
-            setPurchasePrice( isOpen ? selectedBook?.purchase_price : "" );
-            setFinishDate( isOpen ? selectedBook?.finish_date : "" );
-            setStatusId( isOpen ? selectedBook?.status_id : 0 );
-            setIsOwned( isOpen ? selectedBook?.is_owned : false );
+        if( selectedBook ){
+            setBookTile( selectedBook?.book_title || "" );
+            setAuthor( selectedBook?.author || "" );
+            setUrl( selectedBook?.url || "" );
+            setISBN( selectedBook?.isbn || "" );
+            setVolumeEdition( selectedBook?.volume_edition || "" );
+            setGenres( selectedBook?.genres_txt || "" );
+            setPublisher( selectedBook?.publisher || "" );
+            setMemo( selectedBook?.summary_memo || "" );
+            setPurchaseDate( selectedBook?.purchase_date || "" );
+            setPurchasePrice( selectedBook?.purchase_price || "" );
+            setFinishDate( selectedBook?.finish_date || "" );
+            setStatusId( selectedBook?.status_id || 0 );
+            setIsOwned( selectedBook?.is_owned || false );
         }
     }, [ isOpen, selectedBook ] );
 
@@ -87,47 +89,47 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
                         <h3 className={styles.dialog_header}>書籍の登録</h3>
                         <p>
                             <label htmlFor='book_title' className={styles.label1}>タイトル:</label>
-                            <input type='text' id="book_title" defaultValue={bookTitle} onChange={ (e) => setBookTile( e.target.value ) } />
+                            <input type='text' id="book_title" value={bookTitle} onChange={ (e) => setBookTile( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='author' className={styles.label1}>著者名:</label>
-                            <input type='text' id="author" defaultValue={author} onChange={ (e) => setAuthor( e.target.value ) } />
+                            <input type='text' id="author" value={author} onChange={ (e) => setAuthor( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='url' className={styles.label1}>URL:</label>
-                            <input type='text' id="url" defaultValue={url} onChange={ (e) => setUrl( e.target.value ) } />
+                            <input type='text' id="url" value={url} onChange={ (e) => setUrl( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='isbn' className={styles.label1}>ISBN:</label>
-                            <input type='text' id="isbn" defaultValue={isbn} onChange={ (e) => setISBN( e.target.value ) } />
+                            <input type='text' id="isbn" value={isbn} onChange={ (e) => setISBN( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='volume_edition' className={styles.label1}>巻数/版:</label>
-                            <input type='text' id="volume_edition" defaultValue={volumeEdition} onChange={ (e) => setVolumeEdition( e.target.value ) } />
+                            <input type='text' id="volume_edition" value={volumeEdition} onChange={ (e) => setVolumeEdition( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='genres_txt' className={styles.label1}>ジャンル:</label>
-                            <input type='text' id="genres_txt" defaultValue={genres} onChange={ (e) => setGenres( e.target.value ) } />
+                            <input type='text' id="genres_txt" value={genres} onChange={ (e) => setGenres( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='publisher' className={styles.label1}>出版社:</label>
-                            <input type='text' id="publisher" defaultValue={publisher} onChange={ (e) => setPublisher( e.target.value ) } />
+                            <input type='text' id="publisher" value={publisher} onChange={ (e) => setPublisher( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='summary_memo' className={styles.label1}>概要/メモ:</label>
-                            <input type='text' id="summary_memo" defaultValue={memo} onChange={ (e) => setMemo( e.target.value ) } />
+                            <input type='text' id="summary_memo" value={memo} onChange={ (e) => setMemo( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='purchase_date' className={styles.label1}>購入日:</label>
-                            <input type='text' id="purchase_date" defaultValue={purchaseDate} onChange={ (e) => setPurchaseDate( e.target.value ) } />
+                            <input type='text' id="purchase_date" value={purchaseDate} onChange={ (e) => setPurchaseDate( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='purchase_price' className={styles.label1}>購入金額:</label>
-                            <input type='text' id="purchase_price" defaultValue={purchasePrice} onChange={ (e) => setPurchasePrice( e.target.value ) } />
+                            <input type='text' id="purchase_price" value={purchasePrice} onChange={ (e) => setPurchasePrice( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='finish_date' className={styles.label1}>読了日:</label>
-                            <input type='text' id="finish_date" defaultValue={finishDate} onChange={ (e) => setFinishDate( e.target.value ) } />
+                            <input type='text' id="finish_date" value={finishDate} onChange={ (e) => setFinishDate( e.target.value ) } />
                         </p>
                         <p>
                             <label htmlFor='is_owned' className={styles.label1}>本棚にあるかどうか:</label>
