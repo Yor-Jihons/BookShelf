@@ -67,19 +67,16 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
         const si = statusId;
         const io = isOwned;
         const tmp = {
-            id: -1, book_title: t, author: a,
+            id: -1, // TODO: Modify here.
+            book_title: t, author: a,
             url: u, isbn: i, volume_edition: v,
             genres_txt: g, publisher: p, summary_memo: m,
             purchase_date: pd, purchase_price: pp, finish_date: fd,
             status_id: si,
             is_owned: io
-        } as Book; // TODO:
+        } as Book;
         onSubmit( tmp );
     };
-
-/*
-    status_id: number;
-*/
 
     return (
         <React.Fragment>
