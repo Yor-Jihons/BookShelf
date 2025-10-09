@@ -1,5 +1,5 @@
-import Book from "../../types/Book";
-import DataBaseEx from "../databases/DataBaseEx";
+import Book from "../../types/Book.js";
+import DataBaseEx from "../databases/DataBaseEx.js";
 import { showSaveFileDialog2ExportAsHtml } from "../dialogs/Dialogs.js";
 import createViewrHtml from "./createViewrHtml.js";
 import fs from 'fs';
