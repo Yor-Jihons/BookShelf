@@ -7,19 +7,7 @@ import cleanupTempFile from "./src/main/cleanups/cleanupTempFile.js";
 import path from 'path';
 import Files from "./src/main/files/Files.js";
 import { fileURLToPath } from 'url';
-import fs from 'fs';
-import Book from './src/types/Book.js';
-import createViewHtml from './src/main/files/createViewrHtml.js';
-
-export default async function exportHtml( db: DataBaseEx ){
-  const filePath = "sample1.html";
-  const ret = db.fetchBooks();
-  if( !ret.success ){
-    return;
-  }
-  const books: Book[] = ret.value as Book[];
-  fs.writeFileSync( filePath, createViewHtml( books ) );
-}
+import exportHtml from "./src/main/files/exportHtml.js"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let i18nData: any = {};
@@ -126,7 +114,7 @@ app.whenReady().then(() => {
 
   // TODO:
   ipcMain.on('export-html', () => {
-    exportHtml( db );
+    exportHtml( db, mainWindow );
   });
 
   ipcMain.handle('fetch-status', () => {

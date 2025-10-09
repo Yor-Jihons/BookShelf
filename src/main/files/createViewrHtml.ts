@@ -43,6 +43,7 @@ export default function createViewrHtml( books: Book[] ){
     <title>BookShelf Viewer</title>
     <style>
         body{ background-color: hsla(60, 45%, 96%, 0.991); }
+        h1{ text-align: center; }
         p{ margin: 0; padding: 0; }
         div#flexbox1{ display: flex; flex-direction: column; width: 100%; }
         div.book-card{ width: 98.5%; margin: 5px; padding-top: 0; padding-bottom: 0; padding-left: 5px; padding-right: 5px; background-color: rgb(196, 195, 195); display: flex; flex-direction: column; }
