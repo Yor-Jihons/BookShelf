@@ -112,7 +112,6 @@ app.whenReady().then(() => {
     return (await dialog.showMessageBox( mainWindow, { message: message, buttons: buttons } ) as any).response;
   });
 
-  // TODO:
   ipcMain.on('export-html', () => {
     exportHtml( db, mainWindow );
   });
