@@ -7,10 +7,13 @@ import cleanupTempFile from "./src/main/cleanups/cleanupTempFile.js";
 import path from 'path';
 import Files from "./src/main/files/Files.js";
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function exportHtml( db: DataBaseEx ){
-  console.log("called the function exportHtml.");
+export default async function exportHtml( db: DataBaseEx ){
+  const filePath = "sample1.txt";
+  const data = "TEXT1";
+  fs.writeFileSync(filePath, data)
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -117,7 +120,7 @@ app.whenReady().then(() => {
   });
 
   // TODO:
-  ipcMain.handle('export-html', () => {
+  ipcMain.on('export-html', () => {
     exportHtml( db );
   });
 
