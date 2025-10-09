@@ -9,48 +9,7 @@ import Files from "./src/main/files/Files.js";
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import Book from './src/types/Book.js';
-
-function escapeHtml( unsafe: string ){
-    if (!unsafe) return '';
-    return unsafe
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-}
-
-export function createViewrHtml( books: Book[] ){
-  const bookCardsHtml = books.map(book => {
-    // テンプレートリテラルでHTML構造を構築
-    return `
-      <div class="book-card" data-id="${book.id}">
-        <h2>${escapeHtml(book.book_title)}</h2>
-        <p class="author">${escapeHtml(book.author)}</p>
-        <p class="status">${escapeHtml(book.status_id.toString())}</p>
-        <p class="isbn">${escapeHtml(book.isbn)}</p>
-        <div class="genre-list">${escapeHtml(book.genres_txt)}</div>
-      </div>
-    `;
-  }).join(''); // 配列を結合して一つのHTML文字列にする
-
-  const text = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookShelf Viewer</title>
-  <style>
-
-  </style>
-</head>
-<body>
-  ${bookCardsHtml}
-</body>
-</html>`;
-  return text;
-}
+import createViewHtml from './src/main/files/createViewrHtml.js';
 
 export default async function exportHtml( db: DataBaseEx ){
   const filePath = "sample1.html";
@@ -58,9 +17,8 @@ export default async function exportHtml( db: DataBaseEx ){
   if( !ret.success ){
     return;
   }
-  //const books: Book[] = ret.value as Book[];
-  const books: Book[] = [];
-  fs.writeFileSync( filePath, createViewrHtml( books ) );
+  const books: Book[] = ret.value as Book[];
+  fs.writeFileSync( filePath, createViewHtml( books ) );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

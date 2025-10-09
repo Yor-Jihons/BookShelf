@@ -78,7 +78,6 @@ function MainPage() {
 
   const exportHtmlButton_click = () => {
     window.interprocessCommunication.exportHtml();
-    console.log("exportHtmlButton_click");
   }
 
   useEffect(() => {
