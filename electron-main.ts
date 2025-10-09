@@ -8,12 +8,22 @@ import path from 'path';
 import Files from "./src/main/files/Files.js";
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import * as ReactDOMServer from 'react-dom/server';
+import Book from './src/types/Book.js';
+import BookShelfViewer from "./src/components/BookShelfViewer/BookShelfViewer.js";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default async function exportHtml( db: DataBaseEx ){
-  const filePath = "sample1.txt";
-  const data = "TEXT1";
-  fs.writeFileSync(filePath, data)
+  //const viewerCss = fs.readFileSync('path/to/viewer.css', 'utf8');
+  const viewerCss = "";
+  const filePath = "sample1.html";
+
+  const books: Book[] = [];
+
+  const htmlString = ReactDOMServer.renderToStaticMarkup(
+    BookShelfViewer({ books: books, styles: viewerCss })
+  );
+  fs.writeFileSync(filePath, '<!DOCTYPE html>' + htmlString )
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
