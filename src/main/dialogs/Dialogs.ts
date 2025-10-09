@@ -27,3 +27,13 @@ export async function showOpenFileDialog2Import( browserWindow: Electron.Browser
     });
     return { canceled, filePaths };
 }
+
+export async function showSaveFileDialog2ExportAsHtml( browserWindow: Electron.BrowserWindow ){
+    const { canceled, filePath } = await dialog.showSaveDialog( browserWindow, {
+        title: "HTMLファイルとしてエクスポート",
+        defaultPath: path.join( os.homedir(), "BookShelfViewer.html" ),
+        buttonLabel: "エクスポート",
+        filters: [{ name: "HTML file", extensions: ["html"] }]
+    });
+    return { canceled, filePath };
+}

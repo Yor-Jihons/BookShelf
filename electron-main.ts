@@ -7,11 +7,7 @@ import cleanupTempFile from "./src/main/cleanups/cleanupTempFile.js";
 import path from 'path';
 import Files from "./src/main/files/Files.js";
 import { fileURLToPath } from 'url';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function exportHtml( db: DataBaseEx ){
-  console.log("called the function exportHtml.");
-}
+import exportHtml from "./src/main/files/exportHtml.js"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let i18nData: any = {};
@@ -116,9 +112,8 @@ app.whenReady().then(() => {
     return (await dialog.showMessageBox( mainWindow, { message: message, buttons: buttons } ) as any).response;
   });
 
-  // TODO:
-  ipcMain.handle('export-html', () => {
-    exportHtml( db );
+  ipcMain.on('export-html', () => {
+    exportHtml( db, mainWindow );
   });
 
   ipcMain.handle('fetch-status', () => {
