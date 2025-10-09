@@ -1,4 +1,4 @@
-import Book from "../../types/Book";
+import Book from "../../types/Book.js";
 
 function escapeHtml( unsafe: string ){
     if (!unsafe) return '';

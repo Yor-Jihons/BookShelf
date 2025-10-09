@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-//import reactLogo from '../assets/react.svg';
-//import viteLogo from '/vite.svg';
-import { useTranslation } from 'react-i18next';
+///import { useTranslation } from 'react-i18next';
 import '../../App.css';
 import styles from "./mainpage.module.css";
 import CommonLayout from '../layout';
@@ -11,7 +9,7 @@ import EditDialog from '../../components/EditDialog/EditDialog';
 import { initialBook } from '../../types/inintialBook';
 
 function MainPage() {
-  const { i18n } = useTranslation();
+  //const { i18n } = useTranslation();
 
   const [status, setStatus] = useState<Status[]>( [] );
   const [books, setBooks] = useState<Book[]>( [] );
@@ -87,25 +85,12 @@ function MainPage() {
 
   return (
     <CommonLayout>
-      <EditDialog isOpen={isEditOpen} onClose={editDialog_close} onSubmit={editDialog_submit} selectedBook={editingBook} />
+      <EditDialog isOpen={isEditOpen} onClose={editDialog_close} onSubmit={editDialog_submit} selectedBook={editingBook} status={status} />
 
       <button onClick={additionButton_click}>書籍の追加</button>
       <button onClick={exportHtmlButton_click}>HTMLとしてエクスポートする</button>
 
       <div>
-        <select>
-          {books.map( (book, idx) => {
-            return <option key={idx}>{book.book_title}</option>
-          })}
-        </select>
-
-        <select>
-          {status.map( (s, idx) => {
-            return <option key={idx}>{s.state_txt}</option>
-          })}
-        </select>
-        <div>{i18n.t('menu.zoom_in')}</div>
-
         <div className={styles.table1}>
           <table className={styles.table1}>
             <thead>

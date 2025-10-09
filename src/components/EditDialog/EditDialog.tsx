@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Book from '../../types/Book';
 import styles from "./editdialog.module.css";
+import Status from '../../types/Status';
 
 interface Props {
     onSubmit: ( newBook: Book ) => void;
     onClose?: () => void;
     isOpen: boolean;
+    status: Status[];
     selectedBook: Book;
 }
 
-const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
+const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook, status}: Props ) => {
     const dialogRef = useRef<HTMLDialogElement>( null );
     const [bookTitle, setBookTile] = useState<string>( "" );
     const [author, setAuthor] = useState<string>( "" );
@@ -134,7 +136,11 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook}: Props ) => {
                         </p>
                         <p>
                             <label htmlFor='status_id' className={styles.label1}>本の状態:</label>
-                            {/* TODO:  */}
+                            <select value={statusId} onChange={ (e) => setStatusId( Number(e.currentTarget.value ) )}>
+                                {status.map( (s, idx) => {
+                                    return <option key={idx} value={s.id}>{s.state_txt}</option>
+                                })}
+                            </select>
                         </p>
                     </div>
                     <div className={styles.button_area}>
