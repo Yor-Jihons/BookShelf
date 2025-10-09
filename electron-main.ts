@@ -52,11 +52,15 @@ export function createViewrHtml( books: Book[] ){
   return text;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default async function exportHtml( db: DataBaseEx ){
   const filePath = "sample1.html";
-  const books: Book[] = []; // TODO:
-  fs.writeFileSync(filePath, createViewrHtml( books ) );
+  const ret = db.fetchBooks();
+  if( !ret.success ){
+    return;
+  }
+  //const books: Book[] = ret.value as Book[];
+  const books: Book[] = [];
+  fs.writeFileSync( filePath, createViewrHtml( books ) );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
