@@ -45,7 +45,7 @@ function MainPage() {
 
         setBooks( prevBooks => [ ...prevBooks, ret.value ] );
     }else{
-        await window.interprocessCommunication.updateBook( 1, newBook ); // TODO: Modify the ID.
+        await window.interprocessCommunication.updateBook( newBook.id, newBook );
         setBooks(prevBooks => 
             prevBooks.map(book => 
                 book.id === selectedBookId ? newBook : book
