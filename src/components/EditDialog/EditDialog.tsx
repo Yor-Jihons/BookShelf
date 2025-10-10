@@ -13,6 +13,7 @@ interface Props {
 
 const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook, status}: Props ) => {
     const dialogRef = useRef<HTMLDialogElement>( null );
+    const [id, setId] = useState<number>( -1 );
     const [bookTitle, setBookTile] = useState<string>( "" );
     const [author, setAuthor] = useState<string>( "" );
     const [url, setUrl] = useState<string>( ""  );
@@ -37,6 +38,7 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook, status}: Props ) 
         }
 
         if( selectedBook ){
+            setId( selectedBook?.id || -1 );
             setBookTile( selectedBook?.book_title || "" );
             setAuthor( selectedBook?.author || "" );
             setUrl( selectedBook?.url || "" );
@@ -69,7 +71,7 @@ const EditDialog = ( {onSubmit, onClose, isOpen, selectedBook, status}: Props ) 
         const si = statusId;
         const io = isOwned;
         const tmp = {
-            id: -1, // TODO: Modify here.
+            id: id,
             book_title: t, author: a,
             url: u, isbn: i, volume_edition: v,
             genres_txt: g, publisher: p, summary_memo: m,

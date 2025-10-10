@@ -95,7 +95,7 @@ export default class DataBaseEx{
                 newBook.volume_edition, newBook.genres_txt, newBook.publisher, newBook.summary_memo,
                 newBook.purchase_date, newBook.purchase_price, newBook.finish_date, newBook.is_owned ? 1 : 0,
                 newBook.status_id,
-                bookId + 1 // TODO:
+                bookId
             ) as any;
             return { success: true, changes: info.changes };
         }catch( error: unknown ){
@@ -125,7 +125,7 @@ export default class DataBaseEx{
         `;
         const stmt = this.#db!.prepare( sql );
         try{
-            const insertedRow = stmt.run(
+            const insertedRow = stmt.get(
                 newBook.book_title, newBook.author, newBook.url, newBook.isbn,
                 newBook.volume_edition, newBook.genres_txt, newBook.publisher, newBook.summary_memo,
                 newBook.purchase_date, newBook.purchase_price, newBook.finish_date, newBook.is_owned ? 1 : 0,
