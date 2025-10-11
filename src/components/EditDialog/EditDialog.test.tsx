@@ -100,10 +100,8 @@ describe('EditDialog', () => {
     // 2. 既存書籍データのロードのテスト
     it('既存の本が選択された場合、データがフォームにロードされるべき', () => {
         const { getByTestId } = setup({ selectedBook: mockExistingBook });
-        
-        // ★変更点: data-testid="book_title" の要素を取得
+
         const titleInput = getByTestId('book_title');
-        // ★変更点: data-testid="status_id" の要素を取得
         const selectElement = getByTestId('status_id');
 
         expect(titleInput).toHaveValue(mockExistingBook.book_title);
@@ -113,8 +111,7 @@ describe('EditDialog', () => {
     // 3. フォーム入力のテスト (タイピングによる状態変化)
     it('タイトル入力フィールドの変更がローカルな状態を更新すべき', async () => {
         const { getByTestId, user } = setup();
-        
-        // ★変更点: data-testid="book_title" の要素を取得
+
         const titleInput = getByTestId('book_title');
         const newTitle = '新しい本のタイトル';
         
@@ -128,16 +125,14 @@ describe('EditDialog', () => {
     // 4. フォーム提出 (onSubmit) のテスト
     it('フォーム提出時に更新されたデータでonSubmitが呼び出されるべき', async () => {
         const { getByTestId, props, user } = setup();
-        
-        // ★変更点: data-testid="book_title" の要素を取得
+
         const titleInput = getByTestId('book_title');
         const newTitle = '変更後のタイトル';
         
         // データを入力
         await user.clear(titleInput); // 初期値をクリア
         await user.type(titleInput, newTitle);
-        
-        // ★変更点: data-testid="submit-button" の要素を取得
+
         // (注: submit-button は props のプロパティ名ではないが、フォームの操作ボタンとして例外的に命名)
         const submitButton = getByTestId('submit-button');
         
@@ -146,9 +141,9 @@ describe('EditDialog', () => {
 
         // onSubmitが1回呼ばれたことを確認
         expect(props.onSubmit).toHaveBeenCalledTimes(1);
-        
+
         const submittedBook = props.onSubmit.mock.calls[0][0];
-        
+
         // 提出された値が正しいことを確認
         expect(submittedBook.book_title).toBe(newTitle);
         expect(submittedBook.id).toBe(-1); // 新規作成IDが維持されていることを確認
@@ -157,13 +152,12 @@ describe('EditDialog', () => {
     // 5. キャンセルボタンのテスト
     it('キャンセルボタンがonCloseを呼び出すべき', async () => {
         const { getByTestId, props, user } = setup();
-        
-        // ★変更点: data-testid="cancel-button" の要素を取得
+
         // (注: cancel-button は props のプロパティ名ではないが、フォームの操作ボタンとして例外的に命名)
         const cancelButton = getByTestId('cancel-button');
-        
+
         await user.click(cancelButton);
-        
+
         // onCloseが1回呼ばれたことを確認
         expect(props.onClose).toHaveBeenCalledTimes(1);
     });
