@@ -165,10 +165,9 @@ describe('EditDialog', () => {
     // 6. selectタグの操作テストと提出
     it('本の状態セレクトボックスの選択変更がonSubmitで正しく反映されるべき', async () => {
         const { getByTestId, props, user } = setup({ selectedBook: mockExistingBook });
-        
-        // ★変更点: data-testid="status_id" の要素を取得
+
         const selectElement = getByTestId('status_id');
-        
+
         // 初期値が'3'であることを確認
         expect(selectElement).toHaveValue('3');
         
