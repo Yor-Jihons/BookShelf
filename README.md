@@ -1,8 +1,8 @@
-# electron.default.electron_vite
+# BookShelf
 
 ## 🚀 はじめに
 
-このテンプレートプロジェクトはElectron + Viteのプロジェクトを簡単に作成するためのものです。言語はTypeScriptとしています。
+このアプリは本棚にある本を管理し、重複購入を防ぐためのものです。
 
 ---
 
