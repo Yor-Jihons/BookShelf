@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 ///import { useTranslation } from 'react-i18next';
 import '../../App.css';
@@ -7,9 +8,11 @@ import Status from '../../types/Status';
 import Book from '../../types/Book';
 import EditDialog from '../../components/EditDialog/EditDialog';
 import { initialBook } from '../../types/inintialBook';
+import { useApi } from '../../contexts/ApiContext';
 
 function MainPage() {
   //const { i18n } = useTranslation();
+  const api = useApi();
 
   const [status, setStatus] = useState<Status[]>( [] );
   const [books, setBooks] = useState<Book[]>( [] );
@@ -19,14 +22,14 @@ function MainPage() {
   const editingBook: Book = (selectedBookId !== null && books.find(book => book.id === selectedBookId)) || { ...initialBook }; 
 
   const fetchStatus = async () => {
-    const ret = await window.interprocessCommunication.fetchStatus();
+    const ret = await api.fetchStatus();
     if( !ret.success ) return;
 
     setStatus( ret.value );
   }
 
   const fetchBooks = async () => {
-    const ret = await window.interprocessCommunication.fetchBooks();
+    const ret = await api.fetchBooks();
     if( !ret.success ) return;
 
     setBooks( ret.value );
@@ -38,14 +41,14 @@ function MainPage() {
 
   const editDialog_submit = async ( newBook: Book ) => {
     if( selectedBookId === null ){
-        const ret = await window.interprocessCommunication.insertBook( newBook );
+        const ret = await api.insertBook( newBook );
         if( !ret.success ){
           return;
         }
 
         setBooks( prevBooks => [ ...prevBooks, ret.value ] );
     }else{
-        await window.interprocessCommunication.updateBook( newBook.id, newBook );
+        await api.updateBook( newBook.id, newBook );
         setBooks(prevBooks => 
             prevBooks.map(book => 
                 book.id === selectedBookId ? newBook : book
@@ -65,7 +68,7 @@ function MainPage() {
 
   const deleteButton_click = async ( event: React.MouseEvent<HTMLButtonElement> ) => {
     const id = Number( event.currentTarget.dataset.id );
-    await window.interprocessCommunication.deleteBook( id );
+    await api.deleteBook( id );
     setBooks( books.filter((book) => (book.id !== id) ) );
   }
 
@@ -75,7 +78,7 @@ function MainPage() {
   }
 
   const exportHtmlButton_click = () => {
-    window.interprocessCommunication.exportHtml();
+    api.exportHtml();
   }
 
   useEffect(() => {

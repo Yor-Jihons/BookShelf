@@ -87,7 +87,6 @@ function createWindow() {
 
 app.whenReady().then(() => {
   systemLocale = app.getLocale();
-  console.log(`OSの言語設定: ${systemLocale}`);
 
   pathManager.init( "database.sqlite", __dirname );
 
