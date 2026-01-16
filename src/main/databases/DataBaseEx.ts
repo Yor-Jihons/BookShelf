@@ -18,7 +18,7 @@ export default class DataBaseEx{
     }
 
     public open( dbFilePath: string ) : boolean{
-        this.#db = new BetterSqlite3( dbFilePath, { verbose: console.log } );
+        this.#db = new BetterSqlite3( dbFilePath );
     return true;
     }
 
