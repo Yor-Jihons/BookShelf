@@ -50,8 +50,8 @@ async function importDBFromOtherDirPath(){
     db.open( dbFilePath );
 
     dialog.showMessageBox( mainWindow, { message: "Restored" } );
-  }catch( err ){
-    console.error( err.message );
+  }catch( err: unknown ){
+    console.error( (err as Error).message );
   }
 }
 
@@ -60,8 +60,8 @@ async function exportDB2OtherDirPath(){
     const { canceled, filePath } = await showSaveFileDialog2Export( mainWindow, calcI18nData( i18nData, systemLocale ) );
     if( canceled ) return;
     db.backup( filePath, ( message:string ) => { dialog.showMessageBox( mainWindow, { message: message } ); } );
-  }catch( err ){
-    console.error( err.message );
+  }catch( err: unknown ){
+    console.error( (err as Error).message );
   }
 }
 
@@ -94,8 +94,8 @@ app.whenReady().then(() => {
     db.open( pathManager.dbFilePath );
     db.createTables();
     createWindow();
-  }catch( err ){
-    dialog.showErrorBox( "起動エラー", err.message );
+  }catch( err: unknown ){
+    dialog.showErrorBox( "起動エラー", (err as Error).message );
     app.quit();
     return;
   }

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Book from "../types/Book";
+import IPCResult from "../types/IPCResult";
 import Status from "../types/Status";
 
 export interface IInterprocessCommunication {
@@ -9,9 +10,9 @@ export interface IInterprocessCommunication {
   chrome: () => string;
   electron: () => string;
   showMessageBox: ( message: string, buttons: string[] ) => Promise<number>; // Returns index of the button which the user selected.
-  fetchStatus: () => Promise<{success: boolean, value: Status[], errMessage?: string }>;
-  fetchBooks: () => Promise<{success: boolean, value: Book[], errMessage?: string }>;
-  insertBook: ( newBook: Book ) => Promise<{success: boolean, value: Book, errMessage?: string}>;
+  fetchStatus: () => Promise<IPCResult<Status[]>>;
+  fetchBooks: () => Promise<IPCResult<Book[]>>;
+  insertBook: ( newBook: Book ) => Promise<IPCResult<Book>>;
   updateBook: ( bookId: number, newBook: Book ) => Promise<{success: boolean, changes?: any, errMessage?: string}>;
   deleteBook: ( bookId: number ) => Promise<{success: boolean, changes?: any, errMessage?: string}>;
   exportHtml: () => void;
